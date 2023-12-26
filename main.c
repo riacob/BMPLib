@@ -3,11 +3,13 @@
 #include <stdint.h>
 #include "bmplib.h"
 #include "bmpgfx.h"
+#include "bmptxt.h"
 
 int main(int argc, char *argv[])
 {
-    FILE *f, *f1;
+    FILE *f, *f1, *ff;
     bmp_file_t *bmpf, *bmpf1;
+    bmp_font_t *font;
     bmp_pixel_t color = {
         .R = 255,
         .G = 133,
@@ -20,10 +22,13 @@ int main(int argc, char *argv[])
     fclose(f);
     //bmp_print_info(bmpf,stdout);
     f1 = fopen(argv[2], "w");
-    assert(f1);
-    bmp_gfx_draw_square_fill(bmpf,200,130,197,200,color);
+    ff = fopen(argv[3], "r");
+    assert(f1 && ff);
+    font = bmp_txt_load_font(ff);
+    assert(font);
+    bmp_gfx_draw_rect_fill(bmpf,200,130,197,200,color);
     bmp_gfx_draw_line(bmpf,0,50,100,55,bmp_gfx_conv_rgb(0,255,127));
-    bmp_gfx_draw_square(bmpf,10,10,70,150,bmp_gfx_conv_rgb(255,255,32));
+    bmp_gfx_draw_rect(bmpf,10,10,70,150,bmp_gfx_conv_rgb(255,255,32));
     bmp_write(bmpf, f1);
     fclose(f1);
     bmp_free(bmpf);
@@ -40,5 +45,6 @@ int main(int argc, char *argv[])
     bmp_write(bmpf,f);
     fclose(f);
     bmp_free(bmpf);*/
+
     return EXIT_SUCCESS;
 }

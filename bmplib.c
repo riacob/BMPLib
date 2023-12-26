@@ -295,6 +295,13 @@ static void bmp_write_colortable(bmp_file_t *bmpf, FILE *f)
     }
 }
 
+static void bmp_write_data(bmp_file_t *bmpf, FILE *f)
+{
+    assert(bmpf && f);
+    fseek(f, bmpf->header->dataOffset, SEEK_SET);
+    fwrite(bmpf->pixels, 3, bmpf->infoHeader->imageSize/3, f);
+}
+
 void bmp_write(bmp_file_t *bmpf, FILE *f)
 {
     assert(bmpf && f);
@@ -307,13 +314,6 @@ void bmp_write(bmp_file_t *bmpf, FILE *f)
 void bmp_raw_drawSquare(uint32_t startx, uint32_t starty, uint32_t sizex, uint32_t sizey, bmp_pixel_t color)
 {
 
-}
-
-static void bmp_write_data(bmp_file_t *bmpf, FILE *f)
-{
-    assert(bmpf && f);
-    fseek(f, bmpf->header->dataOffset, SEEK_SET);
-    fwrite(bmpf->pixels, 3, bmpf->infoHeader->imageSize/3, f);
 }
 
 bmp_file_t* bmp_create_24bpp(uint32_t xSize, uint32_t ySize)
