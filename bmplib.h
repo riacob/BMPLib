@@ -74,14 +74,40 @@ typedef struct
     bmp_pixel_t *pixels;
 } bmp_file_t;
 
+/**
+ * @brief Reads a file as a bitmap
+ * 
+ * @param f: Pointer to file
+ * @return bmp_file_t*: Pointer to bitmap allocation
+ */
 bmp_file_t *bmp_read(FILE *f);
+/**
+ * @brief Writes bitmap to file
+ * 
+ * @param bmpf: Bitmap
+ * @param f: Pointer to file
+ */
 void bmp_write(bmp_file_t *bmpf, FILE *f);
+/**
+ * @brief Prints header & infoHeader
+ * 
+ * @param bmpf: Bitmap 
+ * @param stream: Output stream
+ */
 void bmp_print_info(bmp_file_t *bmpf, FILE *stream);
+/**
+ * @brief Frees the memory occupied by the bitmap
+ * 
+ * @param bmpf: Bitmap 
+ */
 void bmp_free(bmp_file_t *bmpf);
-void bmp_write_header(bmp_file_t *bmpf, FILE *f);
-void bmp_write_infoheader(bmp_file_t *bmpf, FILE *f);
-void bmp_write_colortable(bmp_file_t *bmpf, FILE *f);
-void bmp_write_data(bmp_file_t *bmpf, FILE *f);
+/**
+ * @brief TODO Creates a 24bpp uncompressed bitmap
+ * 
+ * @param xSize: Width of bitmap
+ * @param ySize: Height of bitmap
+ * @return bmp_file_t*: Pointer to bitmap allocation
+ */
 bmp_file_t* bmp_create_24bpp(uint32_t xSize, uint32_t ySize);
 
 #endif

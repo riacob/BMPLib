@@ -245,7 +245,7 @@ void bmp_free(bmp_file_t *bmpf)
     free(bmpf->pixels);
 }
 
-void bmp_write_header(bmp_file_t *bmpf, FILE *f)
+static void bmp_write_header(bmp_file_t *bmpf, FILE *f)
 {
     assert(bmpf && f);
     fseek(f, BMP_ADDR_SIGNATURE, SEEK_SET);
@@ -258,7 +258,7 @@ void bmp_write_header(bmp_file_t *bmpf, FILE *f)
     fwrite(&bmpf->header->dataOffset, 4, 1, f);
 }
 
-void bmp_write_infoheader(bmp_file_t *bmpf, FILE *f)
+static void bmp_write_infoheader(bmp_file_t *bmpf, FILE *f)
 {
     assert(bmpf && f);
     fseek(f, BMP_ADDR_INFOHEADERSIZE, SEEK_SET);
@@ -285,7 +285,7 @@ void bmp_write_infoheader(bmp_file_t *bmpf, FILE *f)
     fwrite(&bmpf->infoHeader->importantColors, 4, 1, f);
 }
 
-void bmp_write_colortable(bmp_file_t *bmpf, FILE *f)
+static void bmp_write_colortable(bmp_file_t *bmpf, FILE *f)
 {
     assert(f);
     if (bmpf->colorTable)
@@ -309,7 +309,7 @@ void bmp_raw_drawSquare(uint32_t startx, uint32_t starty, uint32_t sizex, uint32
 
 }
 
-void bmp_write_data(bmp_file_t *bmpf, FILE *f)
+static void bmp_write_data(bmp_file_t *bmpf, FILE *f)
 {
     assert(bmpf && f);
     fseek(f, bmpf->header->dataOffset, SEEK_SET);

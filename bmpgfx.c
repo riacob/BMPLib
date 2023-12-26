@@ -112,7 +112,7 @@ bmp_pixel_t bmp_gfx_conv_rgb(uint8_t r, uint8_t g, uint8_t b)
     return pix;
 }
 
-void bmp_gfx_draw_square_fill(bmp_file_t *f, uint32_t startx, uint32_t starty, uint32_t sizex, uint32_t sizey, bmp_pixel_t color)
+void bmp_gfx_draw_rect_fill(bmp_file_t *f, uint32_t startx, uint32_t starty, uint32_t sizex, uint32_t sizey, bmp_pixel_t color)
 {
     assert(f);
     // Crop drawing if it doesn't fit in the image
@@ -189,7 +189,7 @@ void bmp_gfx_draw_line(bmp_file_t *f, uint32_t startx, uint32_t starty, uint32_t
     }
 }
 
-void bmp_gfx_draw_square(bmp_file_t *f, uint32_t startx, uint32_t starty, uint32_t sizex, uint32_t sizey, bmp_pixel_t color)
+void bmp_gfx_draw_rect(bmp_file_t *f, uint32_t startx, uint32_t starty, uint32_t sizex, uint32_t sizey, bmp_pixel_t color)
 {
     assert(f);
     // Crop drawing if it doesn't fit in the image
